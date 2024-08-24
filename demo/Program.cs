@@ -1,6 +1,6 @@
 ﻿namespace demo
 {
-    #region  operator overloading
+    #region  overloading
     class Complex
     {
         public int? Real { get; set; }
@@ -9,6 +9,8 @@
         {
             return $"{Real} + {Img}i";
         }
+        #region operator overloadig
+        #region binary operator overloading
         public static Complex operator +(Complex left, Complex right)
         {
             return new Complex
@@ -25,6 +27,7 @@
                 Img = (left?.Img ?? 0) - (right?.Img ?? 0)
             };
         }
+        #endregion
         #region unary operator overloading
         public static Complex operator ++(Complex c)
         {
@@ -46,8 +49,8 @@
         #region relational operators < ,>,>=,<=,!=,==
         public static bool operator >(Complex left, Complex right)
         {
-            if (left.Real == right.Real) { 
-                return left.Img>right.Img;
+            if (left.Real == right.Real) {
+                return left.Img > right.Img;
             }
             else
             {
@@ -69,6 +72,47 @@
         }
 
         #endregion
+        #endregion
+        #region casting operator overloading
+        public static  explicit operator int (Complex c)
+            {
+            return c?.Real??0;
+            }
+        public static implicit operator string?(Complex c)
+        {
+            return c?.ToString()??string.Empty;
+        }
+        #endregion
+    }
+    #endregion
+    #region Casting operator overloading[model]
+    class User
+    {
+        public int Id { get; set; }
+        public string? FullName { get; set; }
+        public string? Email { get; set; }
+        public string? Passowrd { get; set; }
+        public Guid SecuirityStamp { get; set; }
+
+        public static explicit operator UserViewModel(User user)
+        {
+            string[]? Names=user?.FullName?.Split(" ");
+            return new UserViewModel
+            {
+                FirstName= Names.Length>0? Names[0]:string.Empty,
+                LastName = Names.Length>0? Names[1]:string.Empty,
+                Email = user.Email,
+
+            };
+        }
+
+    }
+    class UserViewModel
+    {
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? Email { get; set; }
+
     }
     #endregion
     internal class Program
@@ -102,6 +146,35 @@
                 Console.WriteLine("c01 < c02");
 
             #endregion
+            #endregion
+
+            #region casting operator overloading
+            Complex C05 = new Complex() { Real = 2, Img = 4 };
+
+            //int Y = (int)C01; // Invalid 
+            //                  // Explicit Casting[Recommended]
+            //                  // (int) -> XXXX Complex > Int
+
+            Console.WriteLine(C05);
+            //Console.WriteLine(Y);
+
+            string S01 = C05.ToString(); // Valid 
+                                         // Implicit Casting
+                                         // (string) => XXXX complex -> string
+            Console.WriteLine(C05);
+            Console.WriteLine(S01);
+
+            ///model from dataabse
+            User user = new User()
+            {
+                Id = 1,
+                FullName = "Marwa Mahmoud",
+                Email = "mm3@gmail.com",
+                Passowrd = "password",
+                SecuirityStamp = Guid.NewGuid(),
+            };
+            UserViewModel userViewModel = (UserViewModel)user;
+            //mappig
             #endregion
         }
     }
