@@ -174,6 +174,7 @@
                 SecuirityStamp = Guid.NewGuid(),
             };
             UserViewModel userViewModel = (UserViewModel)user;
+            Console.WriteLine(userViewModel.FirstName);
             //mappig
             #endregion
         }
