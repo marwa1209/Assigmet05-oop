@@ -49,7 +49,8 @@
         #region relational operators < ,>,>=,<=,!=,==
         public static bool operator >(Complex left, Complex right)
         {
-            if (left.Real == right.Real) {
+            if (left.Real == right.Real)
+            {
                 return left.Img > right.Img;
             }
             else
@@ -74,13 +75,13 @@
         #endregion
         #endregion
         #region casting operator overloading
-        public static  explicit operator int (Complex c)
-            {
-            return c?.Real??0;
-            }
+        public static explicit operator int(Complex c)
+        {
+            return c?.Real ?? 0;
+        }
         public static implicit operator string?(Complex c)
         {
-            return c?.ToString()??string.Empty;
+            return c?.ToString() ?? string.Empty;
         }
         #endregion
     }
@@ -96,11 +97,11 @@
 
         public static explicit operator UserViewModel(User user)
         {
-            string[]? Names=user?.FullName?.Split(" ");
+            string[]? Names = user?.FullName?.Split(" ");
             return new UserViewModel
             {
-                FirstName= Names.Length>0? Names[0]:string.Empty,
-                LastName = Names.Length>0? Names[1]:string.Empty,
+                FirstName = Names.Length > 0 ? Names[0] : string.Empty,
+                LastName = Names.Length > 0 ? Names[1] : string.Empty,
                 Email = user.Email,
 
             };
@@ -113,6 +114,43 @@
         public string? LastName { get; set; }
         public string? Email { get; set; }
 
+    }
+    #endregion
+    #region abstraction
+    abstract class shape
+    {
+        public decimal Dim01 { get; set; }
+        public decimal Dim02 { get; set; }
+        public abstract decimal CalcArea();
+        public abstract decimal Premiter { get;  }
+
+    }
+    abstract class Recbase : shape
+    {
+        public override decimal CalcArea()
+        {
+            return Dim01 * Dim02;
+        }
+    }
+    class Rectagle : Recbase
+    {
+        public override decimal Premiter
+        {
+            get { return (Dim01 + Dim02) * 2; }
+        }
+
+    }
+    class Square : Recbase
+    {
+        public Square(decimal Dim)
+        {
+            Dim02 = Dim;
+            Dim01 = Dim;
+        }
+        public override decimal Premiter
+        {
+            get { return (Dim01) * 4; }
+        }
     }
     #endregion
     internal class Program
@@ -140,7 +178,7 @@
             Console.WriteLine(c03);
             #endregion
             #region relational operators < ,>,>=,<=,!=,==
-            if (c01>c02)
+            if (c01 > c02)
                 Console.WriteLine("c01>c02");
             else if (c01 < c02)
                 Console.WriteLine("c01 < c02");
@@ -176,6 +214,18 @@
             UserViewModel userViewModel = (UserViewModel)user;
             Console.WriteLine(userViewModel.FirstName);
             //mappig
+            #endregion
+            #region abstraction
+            Rectagle rectagle = new Rectagle();
+            rectagle.Dim01= 10;
+            rectagle.Dim02= 20;
+            decimal RectArea=rectagle.CalcArea();
+            Console.WriteLine(RectArea);
+            Console.WriteLine(rectagle.Premiter);
+
+            Square square = new Square(7);
+            Console.WriteLine(square.CalcArea());
+            Console.WriteLine(square.Premiter);
             #endregion
         }
     }
