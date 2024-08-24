@@ -122,7 +122,7 @@
         public decimal Dim01 { get; set; }
         public decimal Dim02 { get; set; }
         public abstract decimal CalcArea();
-        public abstract decimal Premiter { get;  }
+        public abstract decimal Premiter { get; }
 
     }
     abstract class Recbase : shape
@@ -151,6 +151,49 @@
         {
             get { return (Dim01) * 4; }
         }
+    }
+    #endregion
+    #region static
+    class utility
+    {
+        //object member constructor
+        public utility(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        //object member property
+        public int x { get; set; }
+        public int y { get; set; }
+
+        //object member method
+        public override string ToString()
+        {
+            return $"x={x} , y = {y}";
+        }
+        //class member method [static]
+        public static double cmtoinch(double cm)
+        {
+            return cm / 2.45;
+        }
+    }
+    #endregion
+    #region sealed
+    class Parent
+    {
+        public sealed virtual void Print()
+        {
+            Console.WriteLine("i am parent");
+        }
+    }
+    class Child : Parent
+    {
+        //invalid
+        //public override void Print()
+        //{
+        //    Console.WriteLine("ia child");
+        //}
     }
     #endregion
     internal class Program
@@ -217,9 +260,9 @@
             #endregion
             #region abstraction
             Rectagle rectagle = new Rectagle();
-            rectagle.Dim01= 10;
-            rectagle.Dim02= 20;
-            decimal RectArea=rectagle.CalcArea();
+            rectagle.Dim01 = 10;
+            rectagle.Dim02 = 20;
+            decimal RectArea = rectagle.CalcArea();
             Console.WriteLine(RectArea);
             Console.WriteLine(rectagle.Premiter);
 
