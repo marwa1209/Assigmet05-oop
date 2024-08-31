@@ -1,5 +1,6 @@
 ﻿
 using Assigmet05_oop.First_Project;
+using Assigmet05_oop.Second_Project;
 using System.Drawing;
 using System.Reflection;
 
@@ -9,8 +10,9 @@ namespace Assigmet05_oop
     {
         static void Main(string[] args)
         {
+            #region Q1
             _3dPoint[] Points =
-            {
+    {
                 new _3dPoint(),
                 new _3dPoint()
             };
@@ -35,7 +37,7 @@ namespace Assigmet05_oop
             }
 
             #endregion
-            if (Points[0]== Points[1])
+            if (Points[0] == Points[1])
             {
                 Console.WriteLine("Equals");
             }
@@ -58,8 +60,29 @@ namespace Assigmet05_oop
             _3dPoint P2 = ReadPoint("P2");
             _3dPoint P3 = (_3dPoint)P1.Clone();
             Console.WriteLine($"Cloned Point: {P3.ToString()}");
+            #endregion
+            #region Q2
+
+            // Add method
+            int sum = Maths.Add(10, 5);
+            Console.WriteLine($"Add: 10 + 5 = {sum}");
+
+            //  Subtract method
+            int difference = Maths.Subtract(10, 5);
+            Console.WriteLine($"Subtract: 10 - 5 = {difference}");
+
+            //   Multiply method
+            int product = Maths.Multiply(10, 5);
+            Console.WriteLine($"Multiply: 10 * 5 = {product}");
+
+            // Divide method
+
+            int quotient = Maths.Divide(10, 5);
+            Console.WriteLine($"Divide: 10 / 5 = {quotient}");
+            #endregion
         }
 
+        #region Q1Methods
         static _3dPoint ReadPoint(string pointName)
         {
             int x, y, z;
@@ -87,5 +110,6 @@ namespace Assigmet05_oop
 
             return coordinate;
         }
+        #endregion
     }
 }
