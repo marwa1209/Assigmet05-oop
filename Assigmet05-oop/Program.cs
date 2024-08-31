@@ -1,6 +1,7 @@
 ﻿
 using Assigmet05_oop.First_Project;
 using Assigmet05_oop.Second_Project;
+using Assigmet05_oop.Third_Project;
 using System.Drawing;
 using System.Reflection;
 
@@ -13,9 +14,9 @@ namespace Assigmet05_oop
             #region Q1
             _3dPoint[] Points =
     {
-                new _3dPoint(),
-                new _3dPoint()
-            };
+                        new _3dPoint(),
+                        new _3dPoint()
+                    };
 
             #region Read Poits From a array
 
@@ -79,6 +80,47 @@ namespace Assigmet05_oop
 
             int quotient = Maths.Divide(10, 5);
             Console.WriteLine($"Divide: 10 / 5 = {quotient}");
+            #endregion
+
+            #region Q3
+            Duration D1 = new Duration(1, 10, 15);
+            Console.WriteLine(D1.ToString());
+            Duration D2 = new Duration(3600);
+            Console.WriteLine(D2.ToString());
+            Duration D3 = new Duration(7800);
+            Console.WriteLine(D3.ToString());
+            Console.WriteLine("*******operators overloadig*********");
+            //operators overloadig
+            //●	D3=D1+D2
+            Console.Write("D1 + D2 = ");
+            Duration D03 = D1 + D2;
+            Console.WriteLine(D03.ToString());
+            //●	D3=D1 + 7800
+            Console.Write("D1 + 7800 = ");
+            Duration D003 = D1 + 7800;
+            Console.WriteLine(D003.ToString());
+            //●	D3 = 666 + D3
+            Console.Write("666 + D2 = ");
+            Duration D0003 = 666 + D2;
+            Console.WriteLine(D0003.ToString());
+            //●	D3= ++D1 (Increase One Minute)
+            Console.Write("++D1 = ");
+            Duration D4 = ++D1;
+            Console.WriteLine(D4.ToString());
+            //●	D3= --D1 (Decrease  One Minute)
+            Console.Write("--D2 = ");
+            Duration D04 = --D1;
+            Console.WriteLine(D04.ToString());
+            //●	D5= D1 -D2
+            Console.Write("D1 -D2 = ");
+            Duration D5 = D1 - D2;
+            Console.WriteLine(D5.ToString());
+            //●	If (D1>D2)
+            Console.Write("If (D1>D2)?=>");
+            Console.WriteLine(D1 > D2);
+            //●	If (D1<=D2)
+            Console.Write("If (D1<=D2)?=>");
+            Console.WriteLine(D1 <= D2);
             #endregion
         }
 
