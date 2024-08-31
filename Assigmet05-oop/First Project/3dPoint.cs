@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assigmet05_oop.First_Project
 {
-    public class _3dPoint
+    public class _3dPoint : IComparable<_3dPoint>, ICloneable
     {
         #region Properties
         public int X { get; set; }
@@ -31,5 +31,32 @@ namespace Assigmet05_oop.First_Project
             return $"Point Coordinates: ({X},{Y},{Z})”.";
         }
 
+        #region operators overloadig
+        public static bool operator ==( _3dPoint a, _3dPoint b)
+        {
+            return (a.X.Equals(b.X)) && (a.Y.Equals(b.Y)) && (a.Z.Equals(b.Z));
+        }
+        public static bool operator !=(_3dPoint a, _3dPoint b)
+        {
+            return !(a== b);
+        }
+        #endregion
+        #region IComparable ad ICloneable 
+        public int CompareTo(_3dPoint other)
+        {
+            if (other == null)
+                return 1;
+
+            if (X != other.X)
+                return X.CompareTo(other.X);
+            else
+                return Y.CompareTo(other.Y);
+        }
+
+        public object Clone()
+        {
+            return new _3dPoint(X, Y, Z);
+        }
+        #endregion
     }
 }

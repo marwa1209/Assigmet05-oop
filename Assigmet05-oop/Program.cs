@@ -1,6 +1,7 @@
 ﻿
 using Assigmet05_oop.First_Project;
 using System.Drawing;
+using System.Reflection;
 
 namespace Assigmet05_oop
 {
@@ -32,8 +33,7 @@ namespace Assigmet05_oop
                 Points[i].Z = z;
 
             }
-            Console.WriteLine(Points[0]);
-            Console.WriteLine(Points[1]);
+
             #endregion
             if (Points[0]== Points[1])
             {
@@ -43,7 +43,49 @@ namespace Assigmet05_oop
             {
                 Console.WriteLine("ot equals");
             }
+            for (int i = 0; i < Points.Length; i++)
+            {
+                Console.WriteLine(Points[i]);
+            }
+            Array.Sort(Points);
 
+            Console.WriteLine("Sorted Points:");
+            foreach (var point in Points)
+            {
+                Console.WriteLine(point.ToString());
+            }
+            _3dPoint P1 = ReadPoint("P1");
+            _3dPoint P2 = ReadPoint("P2");
+            _3dPoint P3 = (_3dPoint)P1.Clone();
+            Console.WriteLine($"Cloned Point: {P3.ToString()}");
+        }
+
+        static _3dPoint ReadPoint(string pointName)
+        {
+            int x, y, z;
+            Console.WriteLine($"Enter the coordinates for {pointName}:");
+
+            x = ReadCoordinate("X");
+            y = ReadCoordinate("Y");
+            z = ReadCoordinate("Z");
+
+            return new _3dPoint(x, y, z);
+        }
+        static int ReadCoordinate(string coordinateName)
+        {
+            int coordinate;
+            bool isValid;
+
+            do
+            {
+                Console.Write($"{coordinateName}: ");
+                string input = Console.ReadLine();
+                isValid = int.TryParse(input, out coordinate);
+                if (!isValid)
+                    Console.WriteLine("Invalid input. Please enter a valid integer.");
+            } while (!isValid);
+
+            return coordinate;
         }
     }
 }
